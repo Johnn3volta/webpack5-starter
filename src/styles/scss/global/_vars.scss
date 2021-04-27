@@ -1,0 +1,16 @@
+//Fonts
+$default-font-size: 16px;
+$default-font: 'FiraSans-Regular', sans-serif;
+
+$colors: ();
+
+$directions: ('top', 'right', 'bottom', 'left');
+
+
+// @media
+$grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1440px, xxl : 1520px);
+$container-max-widths: (sm: 540px, md: 720px, lg: 960px, xl: 1234px);
+
+
+//other
+$gutter: 30px;

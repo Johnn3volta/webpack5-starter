@@ -1,0 +1,47 @@
+/* Глобальные стили */
+
+@import '~bootstrap/scss/bootstrap-reboot';
+
+@import "./_mixins/centered";
+@import "./vars";
+@import "generators";
+@import "functions";
+@import "./fonts";
+@import "./buttons";
+
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~bootstrap/scss/bootstrap-grid';
+@import '~bootstrap/scss/navbar';
+@import '~bootstrap/scss/nav';
+@import '~bootstrap/scss/transitions';
+@import '~bootstrap/scss/images';
+@import '~bootstrap/scss/utilities/text';
+@import '~bootstrap/scss/utilities/background';
+
+
+* {
+
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+
+  &.o-hidden {
+    overflow: hidden;
+  }
+}
+
+.link {
+  text-decoration: none;
+  transition: all .3s linear;
+  display: block;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
+}

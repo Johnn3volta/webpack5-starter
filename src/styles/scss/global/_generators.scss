@@ -1,0 +1,16 @@
+@each $direction in $directions {
+  @for $i from 0 through 20 {
+
+    @each $point, $value in $grid-breakpoints {
+      .space-#{$direction}-#{$point}-#{$i} {
+        @include media-breakpoint-down($point) {
+          margin-#{$direction}: calc((#{$i} * 10px)) !important;
+        }
+      }
+    }
+
+    .space-#{$direction}-#{$i} {
+      margin-#{$direction}: calc((#{$i} * 10px)) !important;
+    }
+  }
+}

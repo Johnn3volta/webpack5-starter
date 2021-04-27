@@ -1,0 +1,7 @@
+@import "_mixins/font_face";
+
+@include font('Hind', normal, 300, '../../../fonts/Hind/Hind-light.woff2',);
+@include font('Hind', normal, 400, '../../../fonts/Hind/Hind-Regular.woff2',);
+@include font('Hind', normal, 500, '../../../fonts/Hind/Hind-Medium.woff2',);
+@include font('Hind', normal, 600, '../../../fonts/Hind/Hind-SemiBold.woff2',);
+@include font('Hind', normal, 700, '../../../fonts/Hind/Hind-Bold.woff2',);
