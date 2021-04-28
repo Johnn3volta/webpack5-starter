@@ -8,29 +8,32 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const { js, build, scss, images, fonts, pugPages } = paths;
+const imageLoader = {
+  loader: 'url-loader',
+  options: {
+    limit: 1000, // in bytes,
+    name(url) {
+
+      const newName = url.replace(`${images}\\`, '');
+      const regex = new RegExp(/\\/g);
+
+      return newName.replace(regex, '/');
+    },
+    publicPath: '../images',
+    outputPath: 'images',
+  },
+};
+
+const imageResize = {
+  loader: 'webpack-image-resize-loader',
+  options: {
+    width: 1920,
+  },
+};
 
 const imagesLoadersOptions = [
-  {
-    loader: 'url-loader',
-    options: {
-      limit: 1000, // in bytes,
-      name(url) {
-
-        const newName = url.replace(`${images}\\`, '');
-        const regex = new RegExp(/\\/g);
-
-        return newName.replace(regex, '/');
-      },
-      publicPath: '../images',
-      outputPath: 'images',
-    },
-  },
-  {
-    loader: 'webpack-image-resize-loader',
-    options: {
-      width: 1920,
-    },
-  },
+  imageLoader,
+  imageResize,
 ];
 
 /* Если верстка ведется в обычном html,
@@ -39,15 +42,24 @@ const imagesLoadersOptions = [
 
 const pagesOfPug = fs.readdirSync(pugPages);
 const templates = [];
+const entryChunks = {};
 pagesOfPug.forEach(page => {
   const baseName = page.replace('.pug', '');
   templates.push(
     new HtmlWebpackPlugin({
       template: `${pugPages}/${page}`,
       filename: `${baseName}.html`,
-      chunk: [baseName],
+      chunk: [
+        'general',
+        baseName,
+      ],
     }),
   );
+
+  entryChunks[baseName] = [
+    `${js}/pages/${baseName}.js`,
+    `${scss}/pages/${baseName}.scss`,
+  ];
 });
 
 const conf = {
@@ -65,10 +77,11 @@ const conf = {
   /* Чанки назвать так же как и входной файл .pug,
    * в противном случае css и js не подтянутся автоматом */
   entry: {
-    index: [
-      `${js}/pages/index.js`,
-      `${scss}/pages/index.scss`,
+    general: [
+      `${js}/general.js`,
+      `${scss}/common/general.scss`,
     ],
+    ...entryChunks,
   },
   output: {
     path: build,
@@ -110,6 +123,9 @@ const conf = {
         use: [
           {
             loader: 'html-loader',
+            options: {
+              sources: false,
+            },
           },
           {
             loader: 'pug-html-loader',
@@ -121,8 +137,13 @@ const conf = {
       },
       /* images */
       {
-        test: /\.(png|jpe?g|webp|gif?)$/i,
+        test: /\.(jpe?g|png|gif)$/,
         use: imagesLoadersOptions,
+      },
+      /* svg */
+      {
+        test: /\.(svg)$/,
+        use: imageLoader,
       },
       /* fonts */
       {
@@ -156,6 +177,11 @@ const conf = {
           to: 'images',
         },
       ],
+    }),
+    new webpack.ProvidePlugin({
+      '$': 'jquery',
+      'jQuery': 'jquery',
+      'window.jQuery': 'jquery',
     }),
     new VueLoaderPlugin(),
   ],

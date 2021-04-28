@@ -1,0 +1,8 @@
+@function setBtnState($scheme, $item, $state: default) {
+  @return map-get(map-get(map-get($buttons-states, $scheme), $state), $item);
+}
+
+
+@function setColor($type, $colorName) {
+  @return map-get(map-get($colors, $type), $colorName);
+}

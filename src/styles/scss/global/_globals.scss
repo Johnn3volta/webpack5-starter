@@ -2,17 +2,14 @@
 
 @import '~bootstrap/scss/bootstrap-reboot';
 
-@import "./_mixins/centered";
-@import "./vars";
+@import "./utilites";
 @import "generators";
-@import "functions";
 @import "./fonts";
 @import "./buttons";
 
-@import '~bootstrap/scss/mixins/breakpoints';
 @import '~bootstrap/scss/bootstrap-grid';
-@import '~bootstrap/scss/navbar';
-@import '~bootstrap/scss/nav';
+//@import '~bootstrap/scss/navbar';
+//@import '~bootstrap/scss/nav';
 @import '~bootstrap/scss/transitions';
 @import '~bootstrap/scss/images';
 @import '~bootstrap/scss/utilities/text';
@@ -40,6 +37,10 @@ body {
   &:hover {
     text-decoration: none;
   }
+}
+
+.list {
+  list-style-type: none;
 }
 
 .grecaptcha-badge {
