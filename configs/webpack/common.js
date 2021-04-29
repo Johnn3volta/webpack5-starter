@@ -14,7 +14,7 @@ const imageLoader = {
     limit: 1000, // in bytes,
     name(url) {
 
-      const newName = url.replace(`${images}\\`, '');
+      const newName = url.replace(`${images}`, '');
       const regex = new RegExp(/\\/g);
 
       return newName.replace(regex, '/');
