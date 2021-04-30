@@ -14,7 +14,7 @@ const imageLoader = {
     limit: 1000, // in bytes,
     name(url) {
 
-      const newName = url.replace(`${images}`, '');
+      const newName = url.replace(images, '');
       const regex = new RegExp(/\\/g);
 
       return newName.replace(regex, '/');
@@ -130,7 +130,7 @@ const conf = {
           {
             loader: 'pug-html-loader',
             options: {
-              'pretty': true,
+              'pretty': false,
             },
           },
         ],
@@ -152,7 +152,12 @@ const conf = {
           {
             loader: 'file-loader',
             options: {
-              name: name => name.replace(fonts, ''),
+              name: name => {
+                const newName = name.replace(fonts, '');
+                const regex = new RegExp(/\\/g);
+
+                return newName.replace(regex, '/');
+              },
               outputPath: 'fonts',
             },
           },
