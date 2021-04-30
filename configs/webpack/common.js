@@ -152,14 +152,7 @@ const conf = {
           {
             loader: 'file-loader',
             options: {
-              // меняет слешы на линуксовские
-              name(url) {
-                const newName = url.replace(`${fonts}\\`, '');
-                const regex = new RegExp(/\\/g);
-
-                return newName.replace(regex, '/');
-              },
-              publicPath: '../fonts',
+              name: name => name.replace(fonts, ''),
               outputPath: 'fonts',
             },
           },
