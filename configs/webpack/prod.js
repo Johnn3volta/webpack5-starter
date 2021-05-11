@@ -1,7 +1,6 @@
-const common = require('./common');
-
 const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const common = require('./common');
 
 const conf = {
   mode: 'production',

@@ -1,11 +1,10 @@
-const paths = require('../paths');
 const fs = require('fs');
-
 const path = require('path');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const paths = require('../paths');
 
 const { js, build, scss, images, fonts, pugPages } = paths;
 const imageLoader = {
@@ -94,7 +93,7 @@ const conf = {
     alias: {
       '@images': images,
       'vue$': 'vue/dist/vue.esm.js',
-      Components: path.resolve(__dirname, 'src/js/Components/'),
+      '@components': path.resolve(__dirname, 'src/js/Components/'),
       '$': 'jquery',
       'jQuery': 'jquery',
       'window.jQuery': 'jquery',
@@ -158,6 +157,7 @@ const conf = {
 
                 return newName.replace(regex, '/');
               },
+              publicPath: '../fonts',
               outputPath: 'fonts',
             },
           },

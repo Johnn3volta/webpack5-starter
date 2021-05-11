@@ -25,6 +25,12 @@
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^8.1.1",
     "css-loader": "^5.2.4",
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.4.0",
     "file-loader": "^6.2.0",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.1",
@@ -35,6 +41,7 @@
     "postcss": "^8.2.12",
     "postcss-loader": "^5.2.0",
     "postcss-preset-env": "^6.7.0",
+    "prettier": "^2.3.0",
     "progress-bar-webpack-plugin": "^2.1.0",
     "pug-html-loader": "^1.1.5",
     "sass": "^1.32.11",
@@ -54,5 +61,57 @@
     "popper.js": "^1.16.1",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.6"
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb-base",
+      "prettier"
+    ],
+    "plugins": [
+      "babel",
+      "import",
+      "prettier"
+    ],
+    "globals": {
+      "window": true,
+      "document": true,
+      "jQuery": true,
+      "$": true,
+      "grecaptcha": true
+    },
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "printWidth": 100,
+          "singleQuote": true,
+          "trailingComma": "all",
+          "semi": true,
+          "bracketSpacing": true,
+          "tabWidth": 2
+        }
+      ],
+      "no-unused-expressions": [
+        "error",
+        {
+          "allowTernary": true
+        }
+      ],
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": true,
+          "optionalDependencies": false,
+          "peerDependencies": false
+        }
+      ],
+      "camelcase": [
+        "error",
+        {
+          "ignoreDestructuring": true,
+          "properties": "never"
+        }
+      ]
+    }
   }
 }

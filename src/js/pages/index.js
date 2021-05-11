@@ -1,5 +1,4 @@
-console.log('hello'); // FIXME: Delete before push
-
+console.log('wadawd'); // FIXME: Delete before push
 
 class Hello {
   constructor() {
