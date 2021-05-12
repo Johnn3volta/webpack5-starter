@@ -1,5 +1,7 @@
 const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+/* Удаляет пустые js скрипты */
+const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 const common = require('./common');
 
 const conf = {
@@ -34,6 +36,7 @@ const conf = {
     ],
   },
   plugins: [
+    new RemoveEmptyScriptsPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/[name].min.css',
     }),

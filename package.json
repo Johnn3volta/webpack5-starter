@@ -52,7 +52,8 @@
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2",
     "webpack-image-resize-loader": "^4.0.2",
-    "webpack-merge": "^5.7.3"
+    "webpack-merge": "^5.7.3",
+    "webpack-remove-empty-scripts": "^0.7.1"
   },
   "dependencies": {
     "bootstrap": "^4.6.0",

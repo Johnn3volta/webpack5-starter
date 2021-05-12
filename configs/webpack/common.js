@@ -12,7 +12,6 @@ const imageLoader = {
   options: {
     limit: 1000, // in bytes,
     name(url) {
-
       const newName = url.replace(images, '');
       const regex = new RegExp(/\\/g);
 
@@ -55,10 +54,20 @@ pagesOfPug.forEach(page => {
     }),
   );
 
-  entryChunks[baseName] = [
-    `${js}/pages/${baseName}.js`,
-    `${scss}/pages/${baseName}.scss`,
-  ];
+  entryChunks[baseName] = [];
+
+  const jsPath = `${js}/pages/${baseName}.js`;
+  const scssPath = `${scss}/pages/${baseName}.scss`;
+  const jsToCompile = fs.existsSync(jsPath) ? jsPath : null;
+  const scssToCompile = fs.existsSync(scssPath) ? scssPath : null;
+
+  if (jsToCompile) {
+    entryChunks[baseName].push(jsToCompile);
+  }
+
+  if (scssToCompile) {
+    entryChunks[baseName].push(scssToCompile);
+  }
 });
 
 const conf = {
@@ -91,11 +100,11 @@ const conf = {
   },
   resolve: {
     alias: {
+      vue$: 'vue/dist/vue.esm.js',
+      $: 'jquery',
+      jQuery: 'jquery',
       '@images': images,
-      'vue$': 'vue/dist/vue.esm.js',
       '@components': path.resolve(__dirname, 'src/js/Components/'),
-      '$': 'jquery',
-      'jQuery': 'jquery',
       'window.jQuery': 'jquery',
     },
     extensions: ['.vue', '.js', '.json'],
@@ -129,7 +138,7 @@ const conf = {
           {
             loader: 'pug-html-loader',
             options: {
-              'pretty': false,
+              pretty: false,
             },
           },
         ],
@@ -177,8 +186,8 @@ const conf = {
       ],
     }),
     new webpack.ProvidePlugin({
-      '$': 'jquery',
-      'jQuery': 'jquery',
+      $: 'jquery',
+      jQuery: 'jquery',
       'window.jQuery': 'jquery',
     }),
     new VueLoaderPlugin(),
@@ -186,3 +195,5 @@ const conf = {
 };
 
 module.exports = conf;
+
+console.info(conf.entry, 'Chunks to Build');
