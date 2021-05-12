@@ -196,4 +196,4 @@ const conf = {
 
 module.exports = conf;
 
-console.info(conf.entry, 'Chunks to Build');
+console.info(conf.entry, '\nChunks to Build');
