@@ -54,20 +54,26 @@ pagesOfPug.forEach(page => {
     }),
   );
 
-  entryChunks[baseName] = [];
-
   const jsPath = `${js}/pages/${baseName}.js`;
   const scssPath = `${scss}/pages/${baseName}.scss`;
   const jsToCompile = fs.existsSync(jsPath) ? jsPath : null;
   const scssToCompile = fs.existsSync(scssPath) ? scssPath : null;
 
+  const entryStack = [];
+  const entryOptions = {
+    dependOn: 'general'
+  };
+
   if (jsToCompile) {
-    entryChunks[baseName].push(jsToCompile);
+    entryStack.push(jsToCompile);
   }
 
   if (scssToCompile) {
-    entryChunks[baseName].push(scssToCompile);
+    entryStack.push(scssToCompile);
   }
+
+  entryOptions.import = entryStack;
+  entryChunks[baseName] = entryOptions;
 });
 
 const conf = {
